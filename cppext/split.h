@@ -45,7 +45,7 @@ namespace cppext
 		template<typename StringT, template<typename = StringT, typename = std::allocator<StringT>> class Container = std::vector>
         auto split(StringT&& toSplit, StringT&& delim)
         {
-            std::vector<StringT> store;
+            Container<StringT> store;
             recursiveSplit(toSplit.cbegin(), toSplit.cend(), delim, store);
             return store;
         }

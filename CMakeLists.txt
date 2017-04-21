@@ -10,7 +10,7 @@ if(dev_build)
         GIT_REPOSITORY      https://github.com/google/googletest.git
         GIT_TAG             master
         ${UPDATE_DISCONNECTED_IF_AVAILABLE}
-        )
+    )
 
     # Prevent GoogleTest from overriding our compiler/linker options
     # when building with Visual Studio
@@ -19,9 +19,15 @@ if(dev_build)
     add_subdirectory(
         ${googletest_SOURCE_DIR}
         ${googletest_BINARY_DIR}
-        )
+    )
 endif(dev_build)
 
 add_subdirectory(
     cppext
+)
+
+if(dev_build)
+    add_subdirectory(
+        test
     )
+endif()
