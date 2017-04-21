@@ -5,7 +5,8 @@
 namespace cppext
 {
     template <typename Iter, typename StringT>
-        decltype(auto) findFirstNotOf(Iter&& begin, Iter&& end, StringT&& delim)
+        auto findFirstNotOf(Iter&& begin, Iter&& end, StringT&& delim)
+			-> decltype(auto)
         {
             return std::find_first_of(
                 begin,
@@ -17,7 +18,8 @@ namespace cppext
         }
 
         template <typename Iter, typename StringT>
-        decltype(auto) findFirstOf(Iter&& begin, Iter&& end, StringT&& delim)
+        auto findFirstOf(Iter&& begin, Iter&& end, StringT&& delim)
+			-> decltype(auto)
         {
             return std::find_first_of(
                 begin,
@@ -28,8 +30,8 @@ namespace cppext
         }
 
         template <typename Iter, typename StringT, class Container>
-        void recursiveSplit(Iter&& begin, Iter&& end, StringT&& delim,
-            Container&& store)
+        auto recursiveSplit(Iter&& begin, Iter&& end, StringT&& delim, Container&& store)
+			-> void
         {
             auto beginCopy = findFirstNotOf(begin, end, delim);
             if(beginCopy != end)
@@ -40,8 +42,8 @@ namespace cppext
             }
         }
 
-        template <typename StringT>
-        std::vector<StringT> split(const StringT& toSplit, const StringT& delim)
+		template<typename StringT, template<typename = StringT, typename = std::allocator<StringT>> class Container = std::vector>
+        auto split(StringT&& toSplit, StringT&& delim)
         {
             std::vector<StringT> store;
             recursiveSplit(toSplit.cbegin(), toSplit.cend(), delim, store);
