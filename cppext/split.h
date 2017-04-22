@@ -37,15 +37,16 @@ namespace cppext
             if(beginCopy != end)
             {
                 auto endCopy = findFirstOf(beginCopy, end, delim);
-                store.emplace_back(StringT{ beginCopy, endCopy });
+                store.emplace_back( beginCopy, endCopy );
                 recursiveSplit(endCopy, end, delim, store);
             }
         }
 
-		template<typename StringT, template<typename = StringT, typename = std::allocator<StringT>> class Container = std::vector>
-        auto split(StringT&& toSplit, StringT&& delim)
+		template<typename StringT, typename Container = std::vector<StringT>>
+		auto split(StringT&& toSplit, StringT&& delim)
+			->std::enable_if_t< std::is_same_v<StringT, typename Container::value_type>, Container>
         {
-            Container<StringT> store;
+			auto store = Container{};
             recursiveSplit(toSplit.cbegin(), toSplit.cend(), delim, store);
             return store;
         }
