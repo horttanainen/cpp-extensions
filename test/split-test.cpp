@@ -155,10 +155,10 @@ TEST(Split, SplittingConstCharWithLValueCharIsSupported)
 
 	EXPECT_THAT(splitted.size(), Eq(5));
 }
-//
-//TEST(Split, ListCanBeUsedAsReturnedContainerType)
-//{
-//	auto splitted = split<const char*, const char*, list<string>>("a, b, c, d, e", ",");
-//
-//	EXPECT_THAT(splitted.size(), Eq(5));
-//}
+
+TEST(Split, ListCanBeUsedAsReturnedContainerType)
+{
+	auto splitted = split<list<string>>("a, b, c, d, e", ",");
+
+	EXPECT_THAT(splitted.size(), Eq(5));
+}
