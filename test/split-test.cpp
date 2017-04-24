@@ -104,12 +104,12 @@ TEST(Split, SplittingLValueStringWithLValueStringIsSupported)
 	EXPECT_THAT(splitted.size(), Eq(5));
 }
 
-TEST(Split, SplittingConstCharWithConstCharIsSupported)
-{
-	auto splitted = split("a,b,c,d,e", ",");
-
-	EXPECT_THAT(splitted.size(), Eq(5));
-}
+//TEST(Split, SplittingConstCharWithConstCharIsSupported)
+//{
+//	auto splitted = split("a,b,c,d,e", ",");
+//
+//	EXPECT_THAT(splitted.size(), Eq(5));
+//}
 
 TEST(Split, SplittingRValueStringWithConstCharIsSupported)
 {
@@ -141,24 +141,41 @@ TEST(Split, SplittingConstCharWithLValueStringIsSupported)
 	EXPECT_THAT(splitted.size(), Eq(5));
 }
 
-TEST(Split, SplittingConstCharWithRValueCharIsSupported)
-{
-	auto splitted = split("a,b,c,d,e", ',');
+//TEST(Split, SplittingConstCharWithLValueCharIsSupported)
+//{
+//	auto splitted = split("a,b,c,d,e", delim);
+//
+//	EXPECT_THAT(splitted.size(), Eq(5));
+//}
 
-	EXPECT_THAT(splitted.size(), Eq(5));
-}
-
-TEST(Split, SplittingConstCharWithLValueCharIsSupported)
-{
-	auto delim = ',';
-	auto splitted = split("a,b,c,d,e", delim);
-
-	EXPECT_THAT(splitted.size(), Eq(5));
-}
-
-TEST(Split, ListCanBeUsedAsReturnedContainerType)
-{
-	auto splitted = split<list<string>>("a, b, c, d, e", ",");
-
-	EXPECT_THAT(splitted.size(), Eq(5));
-}
+////////////////////////////////////////////////////////////////////////////
+//// Passing container is very awkward as is shown below
+//
+//TEST(Split, ListCanBeUsedAsReturnedContainerType1)
+//{
+//	auto splitted = split<list<string>>("a, b, c, d, e", ",");
+//
+//	EXPECT_THAT(splitted.size(), Eq(5));
+//}
+//
+//TEST(Split, ListCanBeUsedAsReturnedContainerType2)
+//{
+//	auto splitted = split<string, string, list<string>>(string{ "a, b, c, d, e" }, string{ "," });
+//
+//	EXPECT_THAT(splitted.size(), Eq(5));
+//}
+//
+//TEST(Split, ListCanBeUsedAsReturnedContainerType3)
+//{
+//	auto splitted = split<string, string, list<string>>("a, b, c, d, e", string{ "," });
+//
+//	EXPECT_THAT(splitted.size(), Eq(5));
+//}
+//
+//TEST(Split, ListCanBeUsedAsReturnedContainerType4)
+//{
+//	auto splitted = split<string, list<string>>("a, b, c, d, e", string{ "," });
+//	// auto splitted = split<const char*,string, list<string>>("a, b, c, d, e", string{ "," }); This doesnt work. User will never learn these...
+//
+//	EXPECT_THAT(splitted.size(), Eq(5));
+//}
