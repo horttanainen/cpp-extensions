@@ -8,6 +8,8 @@
 #include <vector>
 #include <list>
 
+#include <fstream>
+
 using namespace cppext;
 using namespace std;
 using namespace testing;
@@ -21,6 +23,15 @@ template <typename T, typename Alloc>
 struct is_vector<std::vector<T, Alloc>> : true_type
 {
 };
+
+TEST(Split, parseLongishString)
+{
+    auto longStringF = ifstream{"long-file-to-split"};
+    auto buffer = stringstream{};
+    buffer << longStringF.rdbuf();
+    auto longString = buffer.str();
+    auto result = split(longString, ":");
+}
 
 TEST(Split, DefaultReturnTypeIsVector)
 {
