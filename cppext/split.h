@@ -32,19 +32,6 @@ namespace cppext
         );
     }
 
-    template <typename Iter1, typename Iter2, typename StringT, class Container>
-    auto recursiveSplit(Iter1&& begin, Iter2&& end, StringT&& delim, Container& store)
-        -> void
-    {
-        auto beginCopy = findFirstNotOf(begin, end, delim);
-        if(beginCopy != end)
-        {
-            auto endCopy = findFirstOf(beginCopy, end, delim);
-            store.emplace_back(beginCopy, endCopy);
-            recursiveSplit(endCopy, std::forward<Iter2>(end), std::forward<StringT>(delim), store);
-        }
-    }
-
     template <class...>
     using void_t = void;
 
