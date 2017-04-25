@@ -104,12 +104,21 @@ TEST(Split, SplittingLValueStringWithLValueStringIsSupported)
 	EXPECT_THAT(splitted.size(), Eq(5));
 }
 
-//TEST(Split, SplittingConstCharWithConstCharIsSupported)
-//{
-//	auto splitted = split("a,b,c,d,e", ",");
-//
-//	EXPECT_THAT(splitted.size(), Eq(5));
-//}
+TEST(Split, SplittingConstCharWithConstCharIsSupported)
+{
+	auto splitted = split("a,b,c,d,e", ",");
+
+	EXPECT_THAT(splitted.size(), Eq(5));
+}
+
+TEST(Split, SplittingLValueConstCharWithLValueConstCharIsSupported)
+{
+    auto toSplit = "a,b,c,d,e";
+    auto delim = ",";
+    auto splitted = split(toSplit, delim);
+
+    EXPECT_THAT(splitted.size(), Eq(5));
+}
 
 TEST(Split, SplittingRValueStringWithConstCharIsSupported)
 {
@@ -141,12 +150,13 @@ TEST(Split, SplittingConstCharWithLValueStringIsSupported)
 	EXPECT_THAT(splitted.size(), Eq(5));
 }
 
-//TEST(Split, SplittingConstCharWithLValueCharIsSupported)
-//{
-//	auto splitted = split("a,b,c,d,e", delim);
-//
-//	EXPECT_THAT(splitted.size(), Eq(5));
-//}
+TEST(Split, SplittingConstCharWithLValueCharIsSupported)
+{
+    auto delim = ',';
+	auto splitted = split("a,b,c,d,e", delim);
+
+	EXPECT_THAT(splitted.size(), Eq(5));
+}
 
 ////////////////////////////////////////////////////////////////////////////
 //// Passing container is very awkward as is shown below
